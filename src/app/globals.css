@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 17px;
+  }
+  body {
+    @apply bg-white text-brand-text;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-brand-heading;
+  }
+  /* Smoother focus and selection for premium feel */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-blue/60;
+    outline-style: solid;
+  }
+  ::selection {
+    @apply bg-brand-blue/15 text-brand-heading;
+  }
+}

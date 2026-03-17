@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+
+# Build
+build
+dist
+*.tsbuildinfo
+
+# Debug
+npm-debug.log*
+.yarn-integrity
+.env*.local
+.vercel
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
