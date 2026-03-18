@@ -105,7 +105,7 @@ const ROW_DATA: [string, string][] = [
 
 /** Relevant official/authoritative links for SEO; project id -> url */
 const PROJECT_LINKS: Partial<Record<number, string>> = {
-  1: "https://www.knma.in/",
+  1: "https://www.knma.org/",
   2: "https://prestigepallavaram.com/",
   3: "https://aiimsmadurai.edu.in/",
   4: "https://www.brigadegroup.com/",

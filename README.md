@@ -10,6 +10,8 @@ A modern, professional, responsive website for NTS Scaffolding — India's trust
 
 ## Getting Started
 
+**First time on this machine?** See **[SETUP.md](./SETUP.md)** for Node.js install and Gmail contact form config.
+
 1. **Install dependencies**
    ```bash
    cd nts-scaffolding

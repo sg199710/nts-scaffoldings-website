@@ -1,24 +1,15 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, Fragment } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { projects, type ProjectCategory } from "@/data/projects";
+import { projects } from "@/data/projects";
 import Link from "next/link";
 import { ease } from "@/lib/animations";
 
-const categories: ProjectCategory[] = ["Infrastructure", "Industrial", "Commercial"];
-
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState<ProjectCategory | "All">("All");
   const [showAll, setShowAll] = useState(false);
-
-  const filtered = useMemo(
-    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
-    [filter],
-  );
-
-  const visible = showAll ? filtered : filtered.slice(0, 18);
+  const visible = showAll ? projects : projects.slice(0, 18);
 
   return (
     <div className="min-h-screen bg-white pb-32 pt-36">
@@ -41,112 +32,83 @@ export default function ProjectsPage() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-14 flex flex-wrap justify-center gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="mt-20"
         >
-          {(["All", ...categories] as const).map((cat) => (
-            <button
-              key={cat}
-              onClick={() => { setFilter(cat); setShowAll(false); }}
-              className={`rounded-full px-7 py-3 text-base font-medium transition-all ${
-                filter === cat
-                  ? "bg-brand-blue text-white"
-                  : "text-brand-text hover:bg-brand-light"
-              }`}
-            >
-              {cat === "All"
-                ? `All (${projects.length})`
-                : `${cat} (${projects.filter((p) => p.category === cat).length})`}
-            </button>
-          ))}
-        </motion.div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={filter}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-20"
-          >
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {visible.map((p, i) => {
-                const card = (
-                  <motion.article
-                    key={p.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.5), ease: ease.out }}
-                    whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
-                    className="group overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
-                  >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-light">
-                      <Image
-                        src={p.image}
-                        alt={p.name}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        unoptimized
-                      />
-                      <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue backdrop-blur-sm">
-                        {p.category}
-                      </span>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((p, i) => {
+              const cardContent = (
+                <motion.article
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.5), ease: ease.out }}
+                  whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
+                  className="group overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-light">
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold leading-snug text-brand-heading">
+                      {p.name}
+                    </h3>
+                    <div className="mt-3 flex items-center gap-2 text-sm text-brand-muted">
+                      <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {p.location}
                     </div>
-                    <div className="p-5">
-                      <h3 className="text-lg font-semibold leading-snug text-brand-heading">
-                        {p.name}
-                      </h3>
-                      <div className="mt-3 flex items-center gap-2 text-sm text-brand-muted">
-                        <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        {p.location}
-                      </div>
-                    </div>
-                  </motion.article>
-                );
-                if (p.url) {
-                  return (
+                  </div>
+                </motion.article>
+              );
+              return (
+                <Fragment key={p.id}>
+                  {p.url ? (
                     <a
-                      key={p.id}
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 rounded-2xl"
                       aria-label={`${p.name} – view project`}
                     >
-                      {card}
+                      {cardContent}
                     </a>
-                  );
-                }
-                return card;
-              })}
-            </div>
+                  ) : (
+                    cardContent
+                  )}
+                </Fragment>
+              );
+            })}
+          </div>
 
-            {!showAll && filtered.length > 18 && (
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, ease: ease.out }}
-                className="mt-16 text-center"
+          {!showAll && projects.length > 18 && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: ease.out }}
+              className="mt-16 text-center"
+            >
+              <motion.button
+                onClick={() => setShowAll(true)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="rounded-full bg-brand-blue px-10 py-4 text-lg font-medium text-white transition-colors hover:bg-brand-blue/90 hover:shadow-lg hover:shadow-brand-blue/15"
               >
-                <motion.button
-                  onClick={() => setShowAll(true)}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="rounded-full bg-brand-blue px-10 py-4 text-lg font-medium text-white transition-colors hover:bg-brand-blue/90 hover:shadow-lg hover:shadow-brand-blue/15"
-                >
-                  Load More ({filtered.length - 18} remaining)
-                </motion.button>
-              </motion.div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+                Load More ({projects.length - 18} remaining)
+              </motion.button>
+            </motion.div>
+          )}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
