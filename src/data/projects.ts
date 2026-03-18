@@ -109,7 +109,7 @@ const PROJECT_LINKS: Partial<Record<number, string>> = {
   2: "https://prestigepallavaram.com/",
   3: "https://aiimsmadurai.edu.in/",
   4: "https://www.brigadegroup.com/",
-  6: "https://www.srjbtemple.org/",
+  6: "https://srjbtkshetra.org/",
   8: "https://www.nhsrcl.in/",
   9: "https://centralvista.gov.in/",
   10: "https://www.cidco.maharashtra.gov.in/",
