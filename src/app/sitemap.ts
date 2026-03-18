@@ -1,8 +1,10 @@
 import { MetadataRoute } from "next";
-import { site } from "@/lib/site";
+import { headers } from "next/headers";
+import { getBaseUrlFromHost } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = site.baseUrl;
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const headersList = await headers();
+  const base = getBaseUrlFromHost(headersList.get("host"));
   const now = new Date();
   return [
     { url: base, lastModified: now, changeFrequency: "weekly", priority: 1.0 },

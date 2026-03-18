@@ -1,9 +1,12 @@
 import { MetadataRoute } from "next";
-import { site } from "@/lib/site";
+import { headers } from "next/headers";
+import { getBaseUrlFromHost } from "@/lib/site";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const headersList = await headers();
+  const base = getBaseUrlFromHost(headersList.get("host"));
   return {
     rules: { userAgent: "*", allow: "/", disallow: ["/api/"] },
-    sitemap: `${site.baseUrl}/sitemap.xml`,
+    sitemap: `${base}/sitemap.xml`,
   };
 }

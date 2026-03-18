@@ -1,10 +1,13 @@
 /**
  * Site-wide config for SEO and canonical URLs.
- * Update baseUrl when deploying to production (e.g. https://ntsscaffoldings.com).
+ * Primary domain: set NEXT_PUBLIC_SITE_URL in Vercel to https://ntsscaffoldings.com or https://ntsscaff.in.
+ * Both domains can be added in Vercel → Settings → Domains; this is the one used for canonical/OG.
  */
 export const site = {
   name: "NTS Scaffoldings Private Limited",
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://ntsscaffoldings.com",
+  /** Alternate domain; add in Vercel Domains so the same site is served there. */
+  alternateDomain: "https://ntsscaff.in",
   defaultTitle: "NTS Scaffoldings Pvt Ltd | #1 Scaffolding Rental Company in India – 45+ Years",
   /** Meta description: aim 150–160 chars for search snippets. */
   defaultDescription:
@@ -21,3 +24,10 @@ export const site = {
   /** Noida coordinates for LocalBusiness geo (optional). */
   geo: { latitude: 28.6271, longitude: 77.3748 },
 } as const;
+
+/** Base URL from request host so ntsscaffoldings.com and ntsscaff.in both work. Use in server components via headers(). */
+export function getBaseUrlFromHost(host: string | null): string {
+  if (!host) return site.baseUrl;
+  const protocol = host.includes("localhost") ? "http" : "https";
+  return `${protocol}://${host}`;
+}
