@@ -3,20 +3,27 @@ import { site } from "@/lib/site";
 import { products } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "Products",
+  title: "Scaffolding Products – Cuplock, Formwork, Props, Couplers & Safety Equipment",
   description:
-    "Cuplock scaffolding, props & jacks, couplers, formwork, and safety equipment. Browse NTS Scaffoldings product catalog for rental across India.",
+    "Browse NTS Scaffoldings full product catalog: Cuplock scaffolding, ledgers, standards, formwork, telescopic props, adjustable jacks, couplers, clamps, steel planks, staircase towers, and safety equipment for rental across India.",
   keywords: [
     "Cuplock scaffolding",
+    "Cuplock scaffolding rental",
     "scaffolding products India",
     "formwork rental",
-    "props and jacks",
+    "telescopic props",
+    "adjustable jacks",
+    "scaffolding couplers",
+    "steel planks",
     "scaffolding safety equipment",
+    "scaffolding accessories India",
+    "staircase tower scaffolding",
+    "walk-way boards",
   ],
   openGraph: {
-    title: "Products | NTS Scaffoldings Private Limited",
+    title: "Scaffolding Products for Rental | NTS Scaffoldings – Full Catalog",
     description:
-      "Cuplock scaffolding, formwork, and safety equipment. Full product catalog for scaffolding rental in India.",
+      "Cuplock scaffolding, formwork, props, jacks, couplers, steel planks, and safety equipment. Full product catalog for scaffolding rental pan-India.",
     url: `${site.baseUrl}/products`,
   },
   alternates: { canonical: `${site.baseUrl}/products` },

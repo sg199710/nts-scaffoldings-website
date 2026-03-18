@@ -5,13 +5,13 @@
 export const site = {
   name: "NTS Scaffoldings Private Limited",
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://ntsscaffoldings.com",
-  defaultTitle: "NTS Scaffoldings Private Limited | Scaffolding Rental Solutions India",
+  defaultTitle: "NTS Scaffoldings Pvt Ltd | #1 Scaffolding Rental Company in India – 45+ Years",
   /** Meta description: aim 150–160 chars for search snippets. */
   defaultDescription:
-    "Scaffolding rental in India since 45+ years. Cuplock scaffolding, formwork, props & safety equipment. Noida, NCR. Get a quote today.",
+    "India's trusted scaffolding rental company since 1979. Cuplock scaffolding, formwork, props, jacks & safety equipment on hire. Pan-India delivery from Noida. Get a free quote.",
   /** Longer description for schema and OG (optional). */
   longDescription:
-    "NTS Scaffoldings Private Limited offers trusted scaffolding rental solutions across India. Cuplock scaffolding systems, formwork, props, jacks, couplers, and safety equipment. Serving infrastructure, industrial, and commercial projects from Noida, NCR.",
+    "NTS Scaffoldings Private Limited is India's leading scaffolding rental company with 45+ years of experience. We supply Cuplock scaffolding systems, formwork, telescopic props, adjustable jacks, couplers, steel planks, and safety equipment on hire for infrastructure, industrial, and commercial projects pan-India. Headquartered in Noida, NCR, we serve clients including L&T, Tata Projects, DLF, Prestige, Godrej, and government bodies across 20+ states.",
   phone: "+91-98736-96128",
   phoneRaw: "+919873696128",
   email: "ntsscaff2004@gmail.com",

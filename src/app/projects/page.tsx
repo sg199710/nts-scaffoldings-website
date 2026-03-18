@@ -27,7 +27,7 @@ export default function ProjectsPage() {
             Our Projects
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-xl leading-relaxed text-brand-text">
-            Project names, locations, and visuals from NTS scaffolding projects across India.
+            76+ scaffolding projects across India — infrastructure, industrial, and commercial. Trusted by L&amp;T, Tata, DLF, Prestige, and government bodies.
           </p>
         </motion.div>
 

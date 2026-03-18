@@ -20,12 +20,25 @@ export const metadata: Metadata = {
   description: site.defaultDescription,
   keywords: [
     "scaffolding rental India",
+    "scaffolding on hire",
     "Cuplock scaffolding",
+    "Cuplock scaffolding rental",
     "NTS Scaffoldings",
-    "construction scaffolding",
+    "NTS Scaffoldings Noida",
+    "scaffolding company India",
+    "construction scaffolding rental",
     "industrial scaffolding India",
+    "formwork rental India",
     "formwork Noida",
     "scaffolding NCR",
+    "scaffolding Delhi NCR",
+    "telescopic props rental",
+    "adjustable jacks scaffolding",
+    "steel planks rental",
+    "scaffolding for construction",
+    "scaffolding equipment hire India",
+    "scaffolding supplier Noida",
+    "scaffolding rental near me",
   ],
   authors: [{ name: site.name, url: site.baseUrl }],
   creator: site.name,
@@ -61,15 +74,28 @@ const organizationJsonLd = {
   url: site.baseUrl,
   logo: `${site.baseUrl}/logo.png`,
   foundingDate: site.foundingDate,
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: site.phone,
-    email: site.email,
-    contactType: "customer service",
-    areaServed: "IN",
-    availableLanguage: "English, Hindi",
-    url: `${site.baseUrl}/contact`,
-  },
+  numberOfEmployees: { "@type": "QuantitativeValue", minValue: 50 },
+  sameAs: [
+    "https://wa.me/919873696128",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: site.phone,
+      email: site.email,
+      contactType: "customer service",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+      url: `${site.baseUrl}/contact`,
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: site.phone,
+      contactType: "sales",
+      areaServed: "IN",
+      availableLanguage: ["English", "Hindi"],
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     streetAddress: "D23, Sector 63",
@@ -78,11 +104,23 @@ const organizationJsonLd = {
     postalCode: "201301",
     addressCountry: "IN",
   },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Scaffolding Equipment Rental",
+    itemListElement: [
+      { "@type": "OfferCatalog", name: "Cuplock Scaffolding Systems" },
+      { "@type": "OfferCatalog", name: "Props & Jacks" },
+      { "@type": "OfferCatalog", name: "Formwork Systems" },
+      { "@type": "OfferCatalog", name: "Couplers & Clamps" },
+      { "@type": "OfferCatalog", name: "Access & Safety Equipment" },
+    ],
+  },
 };
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": `${site.baseUrl}/#localbusiness`,
   name: site.name,
   description: site.longDescription,
   url: site.baseUrl,
@@ -102,9 +140,23 @@ const localBusinessJsonLd = {
     latitude: site.geo.latitude,
     longitude: site.geo.longitude,
   },
-  areaServed: { "@type": "Country", name: "India" },
+  areaServed: [
+    { "@type": "Country", name: "India" },
+    { "@type": "State", name: "Uttar Pradesh" },
+    { "@type": "State", name: "Delhi" },
+    { "@type": "State", name: "Haryana" },
+    { "@type": "State", name: "Maharashtra" },
+  ],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
   priceRange: "$$",
   image: `${site.baseUrl}/logo.png`,
+  paymentAccepted: "Cash, Bank Transfer, Cheque",
+  currenciesAccepted: "INR",
 };
 
 const websiteJsonLd = {
@@ -115,10 +167,59 @@ const websiteJsonLd = {
   url: site.baseUrl,
   publisher: { "@id": `${site.baseUrl}/#organization` },
   inLanguage: "en-IN",
-  potentialAction: {
-    "@type": "ReadAction",
-    target: [{ "@type": "EntryPoint", urlTemplate: `${site.baseUrl}/contact` }],
-  },
+  potentialAction: [
+    {
+      "@type": "ReadAction",
+      target: [{ "@type": "EntryPoint", urlTemplate: `${site.baseUrl}/contact` }],
+    },
+  ],
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What types of scaffolding does NTS Scaffoldings offer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "NTS Scaffoldings offers Cuplock scaffolding systems, formwork, telescopic props, adjustable jacks, couplers, clamps, steel planks, walk-way boards, staircase towers, and safety equipment on rental across India.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Which cities does NTS Scaffoldings deliver to?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "NTS Scaffoldings delivers pan-India from our Noida, NCR headquarters. We have supplied scaffolding to projects in Delhi, Mumbai, Chennai, Hyderabad, Pune, Kolkata, Gurgaon, Ahmedabad, Assam, Rajasthan, and 20+ states.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long has NTS Scaffoldings been in business?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "NTS Scaffoldings Private Limited was established in 1979 and has over 45 years of experience in scaffolding rental for construction projects across India.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who are some of the clients NTS Scaffoldings has worked with?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "NTS Scaffoldings has served clients including L&T, Tata Projects, DLF, Prestige Group, Godrej Properties, Oberoi Realty, IKEA, Wipro, Foxconn, Reliance, Maruti Suzuki, and multiple government bodies such as AIIMS, IIT, and CIDCO.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I get a scaffolding rental quote from NTS?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can get a free quote by calling +91-98736-96128, emailing ntsscaff2004@gmail.com, messaging on WhatsApp, or filling out the contact form on our website at ntsscaffoldings.com/contact.",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -141,6 +242,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         <Navbar />
         <main>{children}</main>
