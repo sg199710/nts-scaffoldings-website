@@ -27,7 +27,7 @@ export default function ProjectsPage() {
             Our Projects
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-xl leading-relaxed text-brand-text">
-            76+ scaffolding projects across India — infrastructure, industrial, and commercial. Trusted by L&amp;T, Tata, DLF, Prestige, and government bodies.
+            Some visuals from NTS scaffoldings projects across India.
           </p>
         </motion.div>
 
@@ -104,7 +104,7 @@ export default function ProjectsPage() {
                 whileTap={{ scale: 0.98 }}
                 className="rounded-full bg-brand-blue px-10 py-4 text-lg font-medium text-white transition-colors hover:bg-brand-blue/90 hover:shadow-lg hover:shadow-brand-blue/15"
               >
-                Load More ({projects.length - 18} remaining)
+                View More
               </motion.button>
             </motion.div>
           )}

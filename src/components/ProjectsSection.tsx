@@ -52,9 +52,6 @@ export default function ProjectsSection() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     unoptimized
                   />
-                  <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue backdrop-blur-sm">
-                    {p.category}
-                  </span>
                 </div>
                 <div className="p-5">
                   <h3 className="text-lg font-semibold leading-snug text-brand-heading">
@@ -93,7 +90,7 @@ export default function ProjectsSection() {
               href="/projects"
               className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-brand-blue/90 hover:shadow-lg hover:shadow-brand-blue/15"
             >
-              View all {projects.length} projects
+              View all projects
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
