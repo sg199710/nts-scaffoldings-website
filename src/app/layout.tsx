@@ -42,6 +42,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: site.name, url: site.baseUrl }],
   creator: site.name,
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",
