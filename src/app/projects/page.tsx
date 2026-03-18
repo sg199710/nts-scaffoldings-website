@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { projects, type ProjectCategory } from "@/data/projects";
 import Link from "next/link";
 import { ease } from "@/lib/animations";
@@ -35,8 +36,7 @@ export default function ProjectsPage() {
             Our Projects
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-xl leading-relaxed text-brand-text">
-            We design, and supply scaffolding and formwork systems trusted by
-            builders across India.
+            Project names, locations, and visuals from NTS scaffolding projects across India.
           </p>
         </motion.div>
 
@@ -73,43 +73,59 @@ export default function ProjectsPage() {
             className="mt-20"
           >
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {visible.map((p, i) => (
-                <motion.article
-                  key={p.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.5), ease: ease.out }}
-                  whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
-                  className="group overflow-hidden rounded-2xl border border-brand-border bg-white p-6 transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
-                >
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <h3 className="text-lg font-semibold leading-snug text-brand-heading">
-                      {p.name}
-                    </h3>
-                    <span className="shrink-0 rounded-full bg-brand-light px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue">
-                      {p.category}
-                    </span>
-                  </div>
-                  <p className="text-base font-medium text-brand-text">
-                    {p.vendor}
-                  </p>
-                  <div className="mt-4 flex items-center gap-4 text-sm text-brand-muted">
-                    <span className="flex items-center gap-1.5">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {p.location}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {p.date}
-                    </span>
-                  </div>
-                </motion.article>
-              ))}
+              {visible.map((p, i) => {
+                const card = (
+                  <motion.article
+                    key={p.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.5), ease: ease.out }}
+                    whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
+                    className="group overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
+                  >
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-light">
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        unoptimized
+                      />
+                      <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue backdrop-blur-sm">
+                        {p.category}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-lg font-semibold leading-snug text-brand-heading">
+                        {p.name}
+                      </h3>
+                      <div className="mt-3 flex items-center gap-2 text-sm text-brand-muted">
+                        <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {p.location}
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+                if (p.url) {
+                  return (
+                    <a
+                      key={p.id}
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 rounded-2xl"
+                      aria-label={`${p.name} – view project`}
+                    >
+                      {card}
+                    </a>
+                  );
+                }
+                return card;
+              })}
             </div>
 
             {!showAll && filtered.length > 18 && (

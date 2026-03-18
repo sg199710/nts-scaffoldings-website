@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import { ease } from "@/lib/animations";
@@ -32,27 +33,53 @@ export default function ProjectsSection() {
         </motion.div>
 
         <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((p, i) => (
-            <motion.article
-              key={p.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.06, ease: ease.out }}
-              whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
-              className="group overflow-hidden rounded-2xl border border-brand-border bg-white p-6 transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
-            >
-              <div className="mb-3 flex items-start justify-between gap-4">
-                <h3 className="text-lg font-semibold leading-snug text-brand-heading">
-                  {p.name}
-                </h3>
-                <span className="shrink-0 rounded-full bg-brand-light px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue">
-                  {p.category}
-                </span>
-              </div>
-              <p className="text-base text-brand-text">{p.vendor}</p>
-              <p className="mt-2 text-sm text-brand-muted">{p.location}</p>
-            </motion.article>
-          ))}
+          {featured.map((p, i) => {
+            const card = (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.06, ease: ease.out }}
+                whileHover={{ y: -4, transition: { duration: 0.25, ease: ease.out } }}
+                className="group overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:border-brand-blue/20 hover:shadow-lg hover:shadow-black/[0.04]"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-light">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    unoptimized
+                  />
+                  <span className="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wider text-brand-blue backdrop-blur-sm">
+                    {p.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold leading-snug text-brand-heading">
+                    {p.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-brand-muted">{p.location}</p>
+                </div>
+              </motion.article>
+            );
+            if (p.url) {
+              return (
+                <a
+                  key={p.id}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 rounded-2xl"
+                  aria-label={`${p.name} – view project`}
+                >
+                  {card}
+                </a>
+              );
+            }
+            return card;
+          })}
         </div>
 
         <motion.div

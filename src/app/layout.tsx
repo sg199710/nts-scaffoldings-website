@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgressClient";
+import { site } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,44 +12,112 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NTS Scaffoldings Private Limited | Scaffolding Rental Solutions India",
-  description:
-    "Trusted scaffolding rental solutions for over 45 years across India. Cuplock Scaffolding, industrial scaffolding, and infrastructure project support.",
+  metadataBase: new URL(site.baseUrl),
+  title: {
+    default: site.defaultTitle,
+    template: "%s | NTS Scaffoldings Private Limited",
+  },
+  description: site.defaultDescription,
   keywords: [
     "scaffolding rental India",
     "Cuplock scaffolding",
     "NTS Scaffoldings",
     "construction scaffolding",
     "industrial scaffolding India",
+    "formwork Noida",
+    "scaffolding NCR",
   ],
+  authors: [{ name: site.name, url: site.baseUrl }],
+  creator: site.name,
   openGraph: {
-    title: "NTS Scaffoldings Private Limited | 45+ Years of Trust",
-    description:
-      "Trusted scaffolding rental solutions for over 45 years across India.",
     type: "website",
+    locale: "en_IN",
+    url: site.baseUrl,
+    siteName: site.name,
+    title: site.defaultTitle,
+    description: site.defaultDescription,
+    images: [{ url: `${site.baseUrl}/og.png`, width: 1200, height: 630, alt: `${site.name} – Scaffolding rental India` }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: site.defaultTitle,
+    description: site.defaultDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: { canonical: site.baseUrl },
+  category: "Construction & Scaffolding",
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "NTS Scaffoldings Private Limited",
-  description: "Trusted scaffolding rental solutions for over 45 years across India. Cuplock Scaffolding, industrial scaffolding, and infrastructure project support.",
-  url: "https://ntsscaffolding.in",
-  logo: "https://ntsscaffolding.in/logo.png",
+  "@id": `${site.baseUrl}/#organization`,
+  name: site.name,
+  description: site.longDescription,
+  url: site.baseUrl,
+  logo: `${site.baseUrl}/logo.png`,
+  foundingDate: site.foundingDate,
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+91-98736-96128",
+    telephone: site.phone,
+    email: site.email,
     contactType: "customer service",
     areaServed: "IN",
     availableLanguage: "English, Hindi",
+    url: `${site.baseUrl}/contact`,
   },
   address: {
     "@type": "PostalAddress",
     streetAddress: "D23, Sector 63",
     addressLocality: "Noida",
+    addressRegion: "Uttar Pradesh",
     postalCode: "201301",
     addressCountry: "IN",
+  },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: site.name,
+  description: site.longDescription,
+  url: site.baseUrl,
+  telephone: site.phone,
+  email: site.email,
+  foundingDate: site.foundingDate,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "D23, Sector 63",
+    addressLocality: "Noida",
+    addressRegion: "Uttar Pradesh",
+    postalCode: "201301",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  areaServed: { "@type": "Country", name: "India" },
+  priceRange: "$$",
+  image: `${site.baseUrl}/logo.png`,
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  description: site.defaultDescription,
+  url: site.baseUrl,
+  publisher: { "@id": `${site.baseUrl}/#organization` },
+  inLanguage: "en-IN",
+  potentialAction: {
+    "@type": "ReadAction",
+    target: [{ "@type": "EntryPoint", urlTemplate: `${site.baseUrl}/contact` }],
   },
 };
 
@@ -64,6 +133,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Navbar />
         <main>{children}</main>
