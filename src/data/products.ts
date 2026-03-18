@@ -31,14 +31,14 @@ export const products: Product[] = [
     sizes: "2.5m / 2m / 1.8m / 1.6m / 1.5m / 1.2m / 1m / 0.9m / 0.6m",
     finishes: "Mild Steel / Galvanized Steel",
     category: "Cuplock System",
-    image: "/products/Ledgers.jpg",
+    image: "/products/ledgers.jpg",
   },
   {
     id: "transoms",
     name: "Transoms",
     sizes: "2.5m / 2m / 1.5m / 1.2m / 1m / 0.6m",
     category: "Cuplock System",
-    image: "/products/Transoms.jpg",
+    image: "/products/transoms.jpg",
   },
   {
     id: "top-cup",
@@ -164,7 +164,7 @@ export const products: Product[] = [
     sizes: "3m / 4m / 6m",
     finishes: "Mild Steel / Galvanized Iron",
     category: "Access & Safety",
-    image: "/products/Ladder.jpg",
+    image: "/products/ladder.jpg",
   },
   {
     id: "walk-way-boards",
@@ -230,7 +230,7 @@ export const products: Product[] = [
     name: "Challie",
     sizes: "6m / 3m / 2.5m",
     category: "Accessories",
-    image: "/products/Challie.jpg",
+    image: "/products/challie.jpg",
   },
   {
     id: "t-type-anchor",
@@ -273,7 +273,7 @@ export const products: Product[] = [
     id: "brace",
     name: "Brace",
     category: "Accessories",
-    image: "/products/Brace.jpg",
+    image: "/products/brace.jpg",
   },
   {
     id: "bay-brace",
