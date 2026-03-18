@@ -124,7 +124,7 @@ export default function ContactPage() {
             {[
               { label: "Phone", lines: [{ text: "+91 98736 96128", href: "tel:+919873696128" }, { text: "+91 88261 91046", href: "tel:+918826191046" }] },
               { label: "Email", lines: [{ text: "ntsscaff2004@gmail.com", href: "mailto:ntsscaff2004@gmail.com" }, { text: "mkg@ntsscaff.in", href: "mailto:mkg@ntsscaff.in" }] },
-              { label: "Address", lines: [{ text: "D23, Sector 63, Noida\u2009-\u2009201301, India" }] },
+              { label: "Address", lines: [{ text: "Corporate Office" }, { text: "D23, Sector 63, Noida\u2009-\u2009201301, India" }] },
             ].map((c) => (
               <div key={c.label}>
                 <p className="text-sm font-medium uppercase tracking-widest text-brand-muted">{c.label}</p>
