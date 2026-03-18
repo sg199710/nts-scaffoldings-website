@@ -7,11 +7,28 @@ import { ease } from "@/lib/animations";
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", phone: "", email: "", message: "" });
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Failed to send");
+      setSent(true);
+      setForm({ name: "", phone: "", email: "", message: "" });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please email us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
   const change = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -63,6 +80,9 @@ export default function ContactPage() {
                 </motion.div>
               ) : (
                 <form onSubmit={submit} className="space-y-6">
+                  {error && (
+                    <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>
+                  )}
                   <div>
                     <label className="mb-2 block text-base font-medium text-brand-heading">Name</label>
                     <input type="text" name="name" required value={form.name} onChange={change} className={inputCls} placeholder="Your name" />
@@ -83,11 +103,12 @@ export default function ContactPage() {
                   </div>
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className="w-full rounded-xl bg-brand-blue py-4 text-lg font-medium text-white transition-colors hover:bg-brand-blue/90"
+                    disabled={loading}
+                    whileHover={loading ? undefined : { scale: 1.01 }}
+                    whileTap={loading ? undefined : { scale: 0.99 }}
+                    className="w-full rounded-xl bg-brand-blue py-4 text-lg font-medium text-white transition-colors hover:bg-brand-blue/90 disabled:opacity-70"
                   >
-                    Send Message
+                    {loading ? "Sending…" : "Send Message"}
                   </motion.button>
                 </form>
               )}

@@ -15,6 +15,7 @@ dist
 # Debug
 npm-debug.log*
 .yarn-integrity
+.env
 .env*.local
 .vercel
 
